@@ -169,7 +169,7 @@
                 "direction"       : [0.0,-1.0,0.0]
             }
         }],
-        "auxiliar_process_list"            : [{
+        "auxiliar_process_list"            : [{ 
             "python_module" : "compute_body_fitted_drag_process",
             "kratos_module" : "KratosMultiphysics.FluidDynamicsApplication",
             "process_name"  : "ComputeBodyFittedDragProcess",
@@ -177,8 +177,178 @@
                 "model_part_name"        : "FluidModelPart.Drag_structure",
                 "write_drag_output_file" : true,
                 "print_drag_to_screen"   : false,
-                "interval"               : [0.0,"End"]
+                "interval"               : [0.0,"End"],
+                "output_file_settings": {
+                    "output_path": "results/ascii_output/forces/"
             }
-        }]
+        }
+    },{
+            "python_module" : "compute_global_force_process",
+            "process_name"  : "ComputeGlobalForceProcess",
+            "Parameters"    : {
+                "model_part_name"        : "FluidModelPart.Drag_structure",
+                "write_output_file" : true,
+                "print_to_screen"   : false,
+                "reference_point"        : [0.0, 0.0, 0.0],
+                "z_rotation_angle"       : 30.0,
+                "interval"               : [0.0,"End"],
+                "output_file_settings": {
+                    "output_path": "results/ascii_output/forces/"
+                }
+            }
+        },{
+            "python_module" : "compute_level_force_process",
+            "process_name"  : "ComputeLevelForceProcess",
+            "Parameters"    : {
+                "model_part_name"        : "FluidModelPart.Drag_structure",
+                "write_output_file" : true,
+                "print_to_screen"   : false,
+                "start_point"       : [0.0,0.0,0.0],
+                "end_point"         : [0.0,0.0,600.0],
+                "z_rotation_angle"  : 30.0,
+                "intervals"   : 11,
+                "interval"               : [0.0,"End"],
+                "output_file_settings": {
+                     "output_path": "results/ascii_output/forces/level_force/"
+                }
+            }
+        },{
+            "python_module" : "point_output_process",
+            "kratos_module" : "KratosMultiphysics",
+            "process_name"  : "PointOutputProcess",
+            "Parameters"    : {
+                "help"            : "This process writes results from a geometrical position (point) in the model to a file. It first searches the entity containing the requested output location and then interpolates the requested variable(s). The output can be requested for elements, conditions and nodes. For nodes no geometrical interpolation is performed, the exact coordinates have to be specified. This process works in MPI as well as with restarts. It can serve as a basis for other processes (e.g. MultiplePointsOutputProcess). Furthermore it can be used for testing in MPI where the node numbers can change",
+                "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
+                "entity_type"       : "element",
+                "position"          : [-1200, 0.0, 400.0],
+                "output_variables"  : ["PRESSURE","VELOCITY_X","VELOCITY_Y","VELOCITY_Z"],
+                "output_file_settings": {            
+                    "file_name"  : "reference_point_output",
+                    "output_path": "results/ascii_output/"}
+            }
+        },{
+            "python_module"   : "multiple_points_output_process",
+            "kratos_module"   : "KratosMultiphysics",
+            "process_name"    : "MultiplePointsOutputProcess",
+            "Parameters" : {
+                "help"              : "This process writes several points to a file. Internally it holds objects of type PointOutputProcess",
+                "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
+                "entity_type"       : "element",
+                "positions"         : [[-1800.0, 0.0, 400],
+                                       [-1200.0, 0.0, 400],
+                                       [ -600.0, 0.0, 400]],
+                "output_variables"  : ["PRESSURE", "VELOCITY_X"],
+                "output_file_settings": {            
+                    "file_name"  : "multiple_point_output_at",
+                    "output_path": "results/ascii_output/multiple_points/"}
+            }
+         },{
+            "python_module"   : "line_output_process",
+            "kratos_module" : "KratosMultiphysics",
+            "process_name"    : "LineOutputProcess",
+            "Parameters" : {
+                "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
+                "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
+                "start_point"       : [-30.0, -30.0, 400.0],
+                "end_point"         : [-30.0,  30.0, 400.0],
+                "sampling_points"   : 10,
+                "output_variables"  : ["PRESSURE"],
+                "output_file_settings": {            
+                    "file_name"  : "line_output_at",
+                    "output_path": "results/ascii_output/line/"}
+            }
+         },{
+            "python_module": "cfl_output_process",
+            "kratos_module": "KratosMultiphysics.FluidDynamicsApplication",
+            "process_name": "CFLOutputProcess",
+            "Parameters": {
+                "model_part_name": "FluidModelPart.fluid_computational_model_part",
+                "write_output_file": true,
+                "print_to_screen": true,
+                "cfl_output_limit": 2.5,
+                "interval": [0.0,"End"],
+                "output_step": 50,
+                "output_file_settings": {
+                    "file_name": "cfl_results",
+                    "output_path": "results/ascii_output/",
+                    "write_buffer_size" : 1
+                }
+            }
+        },{
+            "kratos_module": "KratosMultiphysics.StatisticsApplication",
+            "python_module": "temporal_statistics_process",
+            "Parameters": {
+                "model_part_name": "FluidModelPart.fluid_computational_model_part",
+                "input_variable_settings": [
+                    {
+                        "method_name": "variance",
+                        "norm_type": "none",
+                        "container": "nodal_historical_non_historical",
+                        "echo_level": 1,
+                        "method_settings": {
+                            "input_variables": [
+                                "VELOCITY",
+                                "PRESSURE"
+                            ],
+                            "output_mean_variables": [
+                                "VECTOR_3D_MEAN",
+                                "SCALAR_MEAN"
+                            ],
+                            "output_variance_variables": [
+                                "VECTOR_3D_VARIANCE",
+                                "SCALAR_VARIANCE"
+                            ]
+                        }
+                    }
+                ],
+                "statistics_start_point_control_variable_name": "TIME",
+                "statistics_start_point_control_value": 0.04
+            }
+        },{
+            "python_module": "single_mesh_temporal_output_process",
+            "kratos_module": "KratosMultiphysics.HDF5Application",
+            "Parameters": {
+                "model_part_name": "FluidModelPart.NoSlip3D_structure",
+                "file_settings": {
+                    "file_access_mode": "truncate",
+                    "echo_level": 1,
+                    "file_name": "results/hdf5_output/deck/<model_part_name>_T-<time>.h5",
+                    "time_format": "0.2f"
+                },
+                "nodal_solution_step_data_settings": {
+                    "list_of_variables": ["PRESSURE"]
+                },
+                "nodal_data_value_settings": {
+                    "list_of_variables": ["SCALAR_MEAN", "SCALAR_VARIANCE"]
+                },
+                "output_time_settings": {
+                    "time_frequency": 0.02,
+                    "step_frequency": 1
+                }
+            }
+        },{
+            "python_module": "single_mesh_temporal_output_process",
+            "kratos_module": "KratosMultiphysics.HDF5Application",
+            "Parameters": {
+                "model_part_name": "FluidModelPart.fluid_computational_model_part",
+                "file_settings": {
+                    "file_access_mode": "truncate",
+                    "echo_level": 1,
+                    "file_name": "results/hdf5_output/domain/<model_part_name>-<time>.h5",
+                    "time_format": "0.2f"
+                },
+                "nodal_solution_step_data_settings": {
+                    "list_of_variables": ["PRESSURE", "VELOCITY"]
+                },
+                "nodal_data_value_settings": {
+                    "list_of_variables": ["SCALAR_MEAN", "SCALAR_VARIANCE", "VECTOR_3D_MEAN", "VECTOR_3D_VARIANCE"]
+                },
+                "output_time_settings": {
+                    "time_frequency": 0.02,
+                    "step_frequency": 1
+                }
+            }
+    
+         }]
     }
 }
