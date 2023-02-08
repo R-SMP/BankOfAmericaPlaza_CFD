@@ -1,4 +1,4 @@
-{
+{   "analysis_stage"   : "KratosMultiphysics.FluidDynamicsApplication.fluid_dynamics_analysis",
     "problem_data"     : {
         "problem_name"  : "cfd",
         "parallel_type" : "MPI",
@@ -210,7 +210,7 @@
         "solver_type"                     : "FractionalStep",
         "model_import_settings"           : {
             "input_type"     : "mdpa",
-            "input_filename" : "cfd"
+            "input_filename" : "project_edge_1.3"
         },
         "material_import_settings"        : {
             "materials_filename" : "FluidMaterials.json"
@@ -248,7 +248,7 @@
             "use_block_matrices_if_possible" : false
         },
         "volume_model_part_name"          : "FluidParts_fluid",
-        "skin_parts"                      : ["AutomaticInlet3D_inlet","Outlet3D_outlet","Slip3D","NoSlip3D_structure","NoSlip3D_bottom"],
+        "skin_parts"                      : ["VelocityConstraints3D_inlet","Outlet3D_outlet","Slip3D","NoSlip3D_structure","NoSlip3D_bottom"],
         "no_skin_parts"                   : ["Drag_structure"],
         "time_stepping"                   : {
             "automatic_time_step" : false,
@@ -263,7 +263,7 @@
             "kratos_module" : "KratosMultiphysics.FluidDynamicsApplication",
             "process_name"  : "ApplyInletProcess",
             "Parameters"    : {
-                "model_part_name" : "FluidModelPart.AutomaticInlet3D_inlet",
+                "model_part_name" : "FluidModelPart.VelocityConstraints3D_inlet",
                 "variable_name"   : "VELOCITY",
                 "interval"        : [0.0,20],
                 "modulus"         : "1.05*28.7*(z/10)**0.2*t/20",
@@ -274,7 +274,7 @@
             "kratos_module" : "KratosMultiphysics.FluidDynamicsApplication",
             "process_name"  : "ApplyInletProcess",
             "Parameters"    : {
-                "model_part_name" : "FluidModelPart.AutomaticInlet3D_inlet",
+                "model_part_name" : "FluidModelPart.VelocityConstraints3D_inlet",
                 "variable_name"   : "VELOCITY",
                 "interval"        : [20,"End"],
                 "modulus"         : "1.05*28.7*(z/10)**0.2",
