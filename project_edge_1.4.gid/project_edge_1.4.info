@@ -1,0 +1,199 @@
+ |  /           |
+ ' /   __| _` | __|  _ \   __|
+ . \  |   (   | |   (   |\__ \
+_|\_\_|  \__,_|\__|\___/ ____/
+           Multi-Physics 9.2."0"-1dee281-Release-x86_64
+Compiled with threading support.
+Maximum number of threads: 1.
+Importing    KratosFluidDynamicsApplication 
+Initializing KratosFluidDynamicsApplication...
+NavierStokesSolverFractionalStep: Construction of NavierStokesSolverFractionalStep solver finished. 
+NavierStokesSolverFractionalStep: Fluid solver variables added correctly. 
+::[PythonSolver]::: Reading model part. 
+SingleImportModelPart: Reading model part from file: C:\Users\RCastedo\Desktop\TUM\3rd_semester\wind engineering\cfd\project_edge_1.4.gid/project_edge_1.4.mdpa
+ModelPartIO:   [Reading Nodes    : 506399 nodes read]
+ModelPartIO:   [Reading Elements : 2934644 elements read] [Type: Element3D4N]
+ModelPartIO:   [Reading Conditions : 45250 conditions read] [Type: SurfaceCondition3D3N]
+ModelPartIO:   [Total Lines Read : 7010339]
+SingleImportModelPart: Finished reading model part from mdpa file.
+ModelPart: -FluidModelPart- model part
+    Buffer Size : 1
+    Number of tables : 0
+    Number of sub model parts : 7
+    Current solution step index : 0
+    DOMAIN_SIZE : 3
+    OSS_SWITCH : 0
+    DYNAMIC_TAU : 0.1
+
+    Number of Geometries  : 0
+    Mesh 0 :
+        Number of Nodes       : 506399
+        Number of Properties  : 1
+        Number of Elements    : 2934644
+        Number of Conditions  : 45250
+        Number of Constraints : 0
+
+    -Drag_structure- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 14587
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Constraints : 0
+    -FluidParts_fluid- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 506399
+            Number of Properties  : 0
+            Number of Elements    : 2934644
+            Number of Conditions  : 0
+            Number of Constraints : 0
+    -NoSlip3D_bottom- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 7215
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 14186
+            Number of Constraints : 0
+    -NoSlip3D_structure- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 14587
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 29020
+            Number of Constraints : 0
+    -Outlet3D_outlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 105
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 170
+            Number of Constraints : 0
+    -Slip3D- model part
+        Number of tables : 0
+        Number of sub model parts : 2
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 996
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 1874
+            Number of Constraints : 0
+        -Slip3D_top- model part
+            Number of tables : 0
+            Number of sub model parts : 0
+
+            Number of Geometries  : 0
+            Mesh 0 :
+                Number of Nodes       : 524
+                Number of Properties  : 0
+                Number of Elements    : 0
+                Number of Conditions  : 954
+                Number of Constraints : 0
+        -Slip3D_wall- model part
+            Number of tables : 0
+            Number of sub model parts : 0
+
+            Number of Geometries  : 0
+            Mesh 0 :
+                Number of Nodes       : 540
+                Number of Properties  : 0
+                Number of Elements    : 0
+                Number of Conditions  : 920
+                Number of Constraints : 0
+    -VelocityConstraints3D_inlet- model part
+        Number of tables : 0
+        Number of sub model parts : 0
+
+        Number of Geometries  : 0
+        Mesh 0 :
+            Number of Nodes       : 105
+            Number of Properties  : 0
+            Number of Elements    : 0
+            Number of Conditions  : 0
+            Number of Constraints : 0
+ 
+::[PythonSolver]:: : Finished reading model part. 
+Read materials: Started
+Read materials: Finished
+TetrahedralMeshOrientationCheck: No inverted elements found
+Mesh orientation check found 35074 inverted conditions.
+NavierStokesSolverFractionalStep: Model reading finished. 
+NavierStokesSolverFractionalStep: Fluid solver DOFs added correctly. 
+[WARNING] VtkOutput: Modelpart "fluid_computational_model_part" has both elements and conditions.
+Giving precedence to elements and writing only elements!
+TimeBasedAsciiFileWriterUtility: File output buffer size set to 1 
+for TimeBasedAsciiFileWriterUtility output file FluidModelPart.Drag_structure_drag.dat 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+Linear-Solver-Factory: Constructing a regular (non-complex) linear-solver 
+NavierStokesSolverFractionalStep: Solver initialization finished. 
+Fluid Dynamics Analysis: Analysis -START-  
+Fluid Dynamics Analysis: STEP:  1 
+Fluid Dynamics Analysis: TIME:  0.03 
+Fluid Dynamics Analysis: STEP:  2 
+Fluid Dynamics Analysis: TIME:  0.06 
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.119941; exp.ratio = 0.001 abs = 0.301814
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 7.99151e-06; exp.ratio = 0.001 abs = 2.01095e-05
+FractionalStepStrategy: Fractional velocity converged in 2 iterations.
+FractionalStepStrategy: Calculating Pressure.
+FractionalStepStrategy: Updating Velocity.
+Fluid Dynamics Analysis: STEP:  3 
+Fluid Dynamics Analysis: TIME:  0.09 
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.568818; exp.ratio = 0.001 abs = 14.2763
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.000103549; exp.ratio = 0.001 abs = 0.00259887
+FractionalStepStrategy: Fractional velocity converged in 2 iterations.
+FractionalStepStrategy: Calculating Pressure.
+FractionalStepStrategy: Updating Velocity.
+Fluid Dynamics Analysis: STEP:  4 
+Fluid Dynamics Analysis: TIME:  0.12 
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.470559; exp.ratio = 0.001 abs = 34.9338
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.000280613; exp.ratio = 0.001 abs = 0.020832
+FractionalStepStrategy: Fractional velocity converged in 2 iterations.
+FractionalStepStrategy: Calculating Pressure.
+FractionalStepStrategy: Updating Velocity.
+Fluid Dynamics Analysis: STEP:  5 
+Fluid Dynamics Analysis: TIME:  0.15 
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.396329; exp.ratio = 0.001 abs = 59.6673
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.000519875; exp.ratio = 0.001 abs = 0.0782639
+FractionalStepStrategy: Fractional velocity converged in 2 iterations.
+FractionalStepStrategy: Calculating Pressure.
+FractionalStepStrategy: Updating Velocity.
+Fluid Dynamics Analysis: STEP:  6 
+Fluid Dynamics Analysis: TIME:  0.18 
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.33865; exp.ratio = 0.001 abs = 86.0178
+FractionalStepStrategy: CONVERGENCE CHECK:
+FractionalStepStrategy: FRAC VEL.: ratio = 0.000792297; exp.ratio = 0.001 abs = 0.201232
+FractionalStepStrategy: Fractional velocity converged in 2 iterations.
+FractionalStepStrategy: Calculating Pressure.
+FractionalStepStrategy: Updating Velocity.
+Fluid Dynamics Analysis: STEP:  7 
+Fluid Dynamics 
