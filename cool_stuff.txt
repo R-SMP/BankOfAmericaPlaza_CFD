@@ -1,0 +1,341 @@
+Windows PowerShell
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+Install the latest PowerShell for new features and improvements! https://aka.ms/PSWindows
+
+PS C:\Users\RCastedo\Desktop\TUM\3rd_semester\wind engineering\cfd> ssh mswe2223@head.st.bv.tum.de
+The authenticity of host 'head.st.bv.tum.de (129.187.141.20)' can't be established.
+RSA key fingerprint is SHA256:oneSDeqvFN/5CgNSEo3RKWxg/zXqkpZFBY5xD+hQTaQ.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'head.st.bv.tum.de' (RSA) to the list of known hosts.
+Password:
+Last login: Thu Feb  9 15:07:49 2023 from 46-38-157-10.tum.vpn.lrz.de
+
+mswe2223@head:~> lz
+Reading directory of  standard input.
+gzip: compressed data not read from a terminal. Use -f to force decompression.
+For help, type: gzip -h
+tar: This does not look like a tar archive
+tar: Exiting with failure status due to previous errors
+mswe2223@head:~> ls
+bin  Documents  Software
+mswe2223@head:~> cd Documents/Group6_RCH_JM_RSMP_advAK/
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> ls
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> cd
+mswe2223@head:~> ls
+bin  Documents  Software
+mswe2223@head:~> cd Documents/Group6_RCH_JM_RSMP_advAK/
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> Get-Location
+If 'Get-Location' is not a typo you can run the following command to lookup the package that contains the binary:
+    command-not-found Get-Location
+-bash: Get-Location: command not found
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> pwd
+/home/mswe2223/Documents/Group6_RCH_JM_RSMP_advAK
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> cd ..
+mswe2223@head:~/Documents> ls
+Group2_FB_JF_LH_advMP   Group4_ME_HK_advAK      Group6_RCH_JM_RSMP_advAK  Test
+Group3_IB_RJ_JT_advGML  Group5_MH_MS_AS_advGML  Templates                 Tests
+mswe2223@head:~/Documents> cd Test
+mswe2223@head:~/Documents/Test> ls
+cfd.mdpa                         compute_level_force_process.py  __pycache__
+cfd.post.lst                     FluidMaterials.json             restart
+compute_custom_drag_process.py   MainKratosCustom.py             results
+compute_global_force_process.py  ProjectParametersCustom.json
+mswe2223@head:~/Documents/Test> cd Tests
+-bash: cd: Tests: No such file or directory
+mswe2223@head:~/Documents/Test> cd ../Tests
+mswe2223@head:~/Documents/Tests> ls
+AK_test  cfd.gid
+mswe2223@head:~/Documents/Tests> cd cfd.gid/
+mswe2223@head:~/Documents/Tests/cfd.gid> ls
+q_run.sh  q_run_test1.sh  q_submit.sh
+mswe2223@head:~/Documents/Tests/cfd.gid> vim
+vim         vimdiff     vim-normal  vimtutor
+mswe2223@head:~/Documents/Tests/cfd.gid> vim q_run.sh
+mswe2223@head:~/Documents/Tests/cfd.gid> cd ..
+mswe2223@head:~/Documents/Tests> cd AK_test/
+mpi/    openmp/
+mswe2223@head:~/Documents/Tests> cd AK_test/mpi/
+cfd_partitioned/ Logs/            __pycache__/     restart/         results/
+mswe2223@head:~/Documents/Tests> cd AK_test/mpi/
+mswe2223@head:~/Documents/Tests/AK_test/mpi> ls
+cfd.cnd                                       err.49862
+cfd_cuts.post.bin                             err.49864
+cfd_cuts.post.lst                             err.49866
+cfd.geo                                       fig_Drag_structure_custom_drag.dat.pdf
+cfd.lin                                       fig_Drag_structure_custom_drag.dat.png
+cfd.mdpa                                      fig_Drag_structure_custom_drag.dat.svg
+cfd.msh                                       FluidMaterials.json
+cfd_partitioned                               graphs_example.grf
+cfd.png                                       log2.txt
+cfd.post.bin                                  Logs
+cfd.post.bin.idx                              log.txt
+cfd.post.lst                                  MainKratosCustom.py
+cfd.prj                                       MainKratos.py
+cfd.rdr                                       output.49854
+cfd.spd                                       output.49855
+cfd.time                                      output.49856
+cfd.tree                                      output.49857
+cfd.vv                                        output.49858
+compute_custom_body_attached_drag_process.py  output.49860
+compute_custom_drag_process.py                output.49862
+compute_global_force_process.py               output.49864
+compute_level_force_process.py                output.49866
+Cut_planes.cut                                plot_custom_aerodynamic_force_results.py
+Drag_structure_custom_drag.dat                ProjectParametersCustom.json
+Drag_structure_drag.dat                       ProjectParameters.json
+err.49854                                     __pycache__
+err.49855                                     q_run.sh
+err.49856                                     q_submit.sh
+err.49857                                     restart
+err.49858                                     results
+err.49860                                     streamlines_example.msh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> vim q_run.sh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> vim q_submit.sh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> sh q_submit.sh
+Your job 49881 ("TestMPI") has been submitted
+mswe2223@head:~/Documents/Tests/AK_test/mpi> qstat
+job-ID  prior   name       user         state submit/start at     queue
+          slots ja-task-ID
+-----------------------------------------------------------------------------------------------------------------
+  49878 0.55500 G5_Alt     mswe2223     r     02/07/2023 14:16:27 impi.q@node-05.st.bv.tum.de       12
+  49880 0.55500 QLOGIN     mswe2223     r     02/08/2023 17:20:33 impi.q@node-02.st.bv.tum.de       12
+  49881 0.55500 TestMPI    mswe2223     r     02/09/2023 17:05:33 impi.q@node-07.st.bv.tum.de       12
+mswe2223@head:~/Documents/Tests/AK_test/mpi> qdel 49881
+mswe2223 has registered the job 49881 for deletion
+mswe2223@head:~/Documents/Tests/AK_test/mpi> ls
+cfd.cnd                                       err.49864
+cfd_cuts.post.bin                             err.49866
+cfd_cuts.post.lst                             err.49881
+cfd.geo                                       fig_Drag_structure_custom_drag.dat.pdf
+cfd.lin                                       fig_Drag_structure_custom_drag.dat.png
+cfd.mdpa                                      fig_Drag_structure_custom_drag.dat.svg
+cfd.msh                                       FluidMaterials.json
+cfd_partitioned                               graphs_example.grf
+cfd.png                                       log2.txt
+cfd.post.bin                                  Logs
+cfd.post.bin.idx                              log.txt
+cfd.post.lst                                  MainKratosCustom.py
+cfd.prj                                       MainKratos.py
+cfd.rdr                                       output.49854
+cfd.spd                                       output.49855
+cfd.time                                      output.49856
+cfd.tree                                      output.49857
+cfd.vv                                        output.49858
+compute_custom_body_attached_drag_process.py  output.49860
+compute_custom_drag_process.py                output.49862
+compute_global_force_process.py               output.49864
+compute_level_force_process.py                output.49866
+Cut_planes.cut                                output.49881
+Drag_structure_custom_drag.dat                plot_custom_aerodynamic_force_results.py
+Drag_structure_drag.dat                       ProjectParametersCustom.json
+err.49854                                     ProjectParameters.json
+err.49855                                     __pycache__
+err.49856                                     q_run.sh
+err.49857                                     q_submit.sh
+err.49858                                     restart
+err.49860                                     results
+err.49862                                     streamlines_example.msh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cd ..
+mswe2223@head:~/Documents/Tests/AK_test> cd ..
+mswe2223@head:~/Documents/Tests> cd ..
+mswe2223@head:~/Documents> ls
+Group2_FB_JF_LH_advMP   Group4_ME_HK_advAK      Group6_RCH_JM_RSMP_advAK  Test
+Group3_IB_RJ_JT_advGML  Group5_MH_MS_AS_advGML  Templates                 Tests
+mswe2223@head:~/Documents> cp /Tests/AK_test/mpi/q_run.sh Group6_RCH_JM_RSMP_advAK/proj
+ect_edge_1.3.gid/
+cp: cannot stat `/Tests/AK_test/mpi/q_run.sh': No such file or directory
+mswe2223@head:~/Documents> scp /Tests/AK_test/mpi/q_run.sh Group6_RCH_JM_RSMP_advAK/pro
+ject_edge_1.3.gid/
+cp: cannot stat `/Tests/AK_test/mpi/q_run.sh': No such file or directory
+mswe2223@head:~/Documents> scp Documents/Tests/AK_test/mpi/q_run.sh Documents/Group6_RC
+H_JM_RSMP_advAK/project_edge_1.3.gid/
+cp: cannot stat `Documents/Tests/AK_test/mpi/q_run.sh': No such file or directory
+mswe2223@head:~/Documents> cp Documents/Tests/AK_test/mpi/q_run.sh Documents/Group6_RCH
+_JM_RSMP_advAK/project_edge_1.3.gid/
+cp: cannot stat `Documents/Tests/AK_test/mpi/q_run.sh': No such file or directory
+mswe2223@head:~/Documents> cd Tests/AK_test/mpi/
+mswe2223@head:~/Documents/Tests/AK_test/mpi> ls
+cfd.cnd                                       err.49864
+cfd_cuts.post.bin                             err.49866
+cfd_cuts.post.lst                             err.49881
+cfd.geo                                       fig_Drag_structure_custom_drag.dat.pdf
+cfd.lin                                       fig_Drag_structure_custom_drag.dat.png
+cfd.mdpa                                      fig_Drag_structure_custom_drag.dat.svg
+cfd.msh                                       FluidMaterials.json
+cfd_partitioned                               graphs_example.grf
+cfd.png                                       log2.txt
+cfd.post.bin                                  Logs
+cfd.post.bin.idx                              log.txt
+cfd.post.lst                                  MainKratosCustom.py
+cfd.prj                                       MainKratos.py
+cfd.rdr                                       output.49854
+cfd.spd                                       output.49855
+cfd.time                                      output.49856
+cfd.tree                                      output.49857
+cfd.vv                                        output.49858
+compute_custom_body_attached_drag_process.py  output.49860
+compute_custom_drag_process.py                output.49862
+compute_global_force_process.py               output.49864
+compute_level_force_process.py                output.49866
+Cut_planes.cut                                output.49881
+Drag_structure_custom_drag.dat                plot_custom_aerodynamic_force_results.py
+Drag_structure_drag.dat                       ProjectParametersCustom.json
+err.49854                                     ProjectParameters.json
+err.49855                                     __pycache__
+err.49856                                     q_run.sh
+err.49857                                     q_submit.sh
+err.49858                                     restart
+err.49860                                     results
+err.49862                                     streamlines_example.msh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> gwd
+If 'gwd' is not a typo you can run the following command to lookup the package that contains the binary:
+    command-not-found gwd
+-bash: gwd: command not found
+mswe2223@head:~/Documents/Tests/AK_test/mpi> pwd
+/home/mswe2223/Documents/Tests/AK_test/mpi
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cd
+mswe2223@head:~> scp /Documents/Tests/AK_test/mpi/q_run.sh /Documents/Group6_RCH_JM_RSM
+P_advAK
+cp: cannot stat `/Documents/Tests/AK_test/mpi/q_run.sh': No such file or directory
+mswe2223@head:~> scp -r /Documents/Tests/AK_test/mpi /Documents/Group6_RCH_JM_RSMP_advA
+K
+cp: cannot stat `/Documents/Tests/AK_test/mpi': No such file or directory
+mswe2223@head:~> cd Tests/AK_test/mpi/
+-bash: cd: Tests/AK_test/mpi/: No such file or directory
+mswe2223@head:~> ls
+bin  Documents  Software
+mswe2223@head:~> cd Documents/Tests/mpi
+-bash: cd: Documents/Tests/mpi: No such file or directory
+mswe2223@head:~> cd Documents/Tests/
+mswe2223@head:~/Documents/Tests> ls
+AK_test  cfd.gid
+mswe2223@head:~/Documents/Tests> AK_test/mpi/
+-bash: AK_test/mpi/: is a directory
+mswe2223@head:~/Documents/Tests> AK_test
+If 'AK_test' is not a typo you can run the following command to lookup the package that contains the binary:
+    command-not-found AK_test
+-bash: AK_test: command not found
+mswe2223@head:~/Documents/Tests> ls
+AK_test  cfd.gid
+mswe2223@head:~/Documents/Tests> cd AK_test/
+mswe2223@head:~/Documents/Tests/AK_test> ls
+mpi  openmp
+mswe2223@head:~/Documents/Tests/AK_test> cd mpi
+mswe2223@head:~/Documents/Tests/AK_test/mpi> ls
+cfd.cnd                                       err.49864
+cfd_cuts.post.bin                             err.49866
+cfd_cuts.post.lst                             err.49881
+cfd.geo                                       fig_Drag_structure_custom_drag.dat.pdf
+cfd.lin                                       fig_Drag_structure_custom_drag.dat.png
+cfd.mdpa                                      fig_Drag_structure_custom_drag.dat.svg
+cfd.msh                                       FluidMaterials.json
+cfd_partitioned                               graphs_example.grf
+cfd.png                                       log2.txt
+cfd.post.bin                                  Logs
+cfd.post.bin.idx                              log.txt
+cfd.post.lst                                  MainKratosCustom.py
+cfd.prj                                       MainKratos.py
+cfd.rdr                                       output.49854
+cfd.spd                                       output.49855
+cfd.time                                      output.49856
+cfd.tree                                      output.49857
+cfd.vv                                        output.49858
+compute_custom_body_attached_drag_process.py  output.49860
+compute_custom_drag_process.py                output.49862
+compute_global_force_process.py               output.49864
+compute_level_force_process.py                output.49866
+Cut_planes.cut                                output.49881
+Drag_structure_custom_drag.dat                plot_custom_aerodynamic_force_results.py
+Drag_structure_drag.dat                       ProjectParametersCustom.json
+err.49854                                     ProjectParameters.json
+err.49855                                     __pycache__
+err.49856                                     q_run.sh
+err.49857                                     q_submit.sh
+err.49858                                     restart
+err.49860                                     results
+err.49862                                     streamlines_example.msh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cp q_run.sh ../../../Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cd
+mswe2223@head:~> cd Documents/Group6_RCH_JM_RSMP_advAK/
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK> cd project_edge_1.3.gid/
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid> ls
+compute_custom_drag_process.py          project_edge_1.3.png
+compute_global_force_process.py         project_edge_1.3.post.lst
+compute_level_force_process.py          project_edge_1.3.prj
+FluidMaterials.json                     project_edge_1.3.rdr
+FluidModelPart.Drag_structure_drag.dat  project_edge_1.3.spd
+gid_output                              project_edge_1.3.tree
+MainKratosCustom.py                     project_edge_1.3.vv
+MainKratos.py                           ProjectParametersCustom.json
+project_edge_1.3.cnd                    ProjectParametersCustom_old.json
+project_edge_1.3.err                    ProjectParameters.json
+project_edge_1.3.geo                    __pycache__
+project_edge_1.3.info                   q_run.sh
+project_edge_1.3.lin                    restart
+project_edge_1.3.mdpa                   results
+project_edge_1.3.msh                    simul.log
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid> cd
+mswe2223@head:~> cd Documents/Tests/AK_test/mpi/
+mswe2223@head:~/Documents/Tests/AK_test/mpi> ls
+cfd.cnd                                       err.49864
+cfd_cuts.post.bin                             err.49866
+cfd_cuts.post.lst                             err.49881
+cfd.geo                                       fig_Drag_structure_custom_drag.dat.pdf
+cfd.lin                                       fig_Drag_structure_custom_drag.dat.png
+cfd.mdpa                                      fig_Drag_structure_custom_drag.dat.svg
+cfd.msh                                       FluidMaterials.json
+cfd_partitioned                               graphs_example.grf
+cfd.png                                       log2.txt
+cfd.post.bin                                  Logs
+cfd.post.bin.idx                              log.txt
+cfd.post.lst                                  MainKratosCustom.py
+cfd.prj                                       MainKratos.py
+cfd.rdr                                       output.49854
+cfd.spd                                       output.49855
+cfd.time                                      output.49856
+cfd.tree                                      output.49857
+cfd.vv                                        output.49858
+compute_custom_body_attached_drag_process.py  output.49860
+compute_custom_drag_process.py                output.49862
+compute_global_force_process.py               output.49864
+compute_level_force_process.py                output.49866
+Cut_planes.cut                                output.49881
+Drag_structure_custom_drag.dat                plot_custom_aerodynamic_force_results.py
+Drag_structure_drag.dat                       ProjectParametersCustom.json
+err.49854                                     ProjectParameters.json
+err.49855                                     __pycache__
+err.49856                                     q_run.sh
+err.49857                                     q_submit.sh
+err.49858                                     restart
+err.49860                                     results
+err.49862                                     streamlines_example.msh
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cp q_submit.sh ../../../Group6_RCH_JM_RSMP
+_advAK/project_edge_1.3.gid
+mswe2223@head:~/Documents/Tests/AK_test/mpi> cd
+mswe2223@head:~> cd Documents/Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid/
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid> ls
+compute_custom_drag_process.py          project_edge_1.3.post.lst
+compute_global_force_process.py         project_edge_1.3.prj
+compute_level_force_process.py          project_edge_1.3.rdr
+FluidMaterials.json                     project_edge_1.3.spd
+FluidModelPart.Drag_structure_drag.dat  project_edge_1.3.tree
+gid_output                              project_edge_1.3.vv
+MainKratosCustom.py                     ProjectParametersCustom.json
+MainKratos.py                           ProjectParametersCustom_old.json
+project_edge_1.3.cnd                    ProjectParameters.json
+project_edge_1.3.err                    __pycache__
+project_edge_1.3.geo                    q_run.sh
+project_edge_1.3.info                   q_submit.sh
+project_edge_1.3.lin                    restart
+project_edge_1.3.mdpa                   results
+project_edge_1.3.msh                    simul.log
+project_edge_1.3.png
+mswe2223@head:~/Documents/Group6_RCH_JM_RSMP_advAK/project_edge_1.3.gid>
+
+
+
+
+
+
+job 49882
