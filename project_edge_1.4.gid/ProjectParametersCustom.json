@@ -2,10 +2,10 @@
     "analysis_stage"   : "KratosMultiphysics.FluidDynamicsApplication.fluid_dynamics_analysis",
     "problem_data"     : {
         "problem_name"  : "project_edge_1.4",
-        "parallel_type" : "MPI",
+        "parallel_type" : "OpenMP",
         "echo_level"    : 0,
         "start_time"    : 0.0,
-        "end_time"      : 250
+        "end_time"      : 5
     },
     "output_processes" : {
         "gid_output" : [{
@@ -581,7 +581,7 @@
                     }
                 ],
                 "statistics_start_point_control_variable_name": "TIME",
-                "statistics_start_point_control_value": 15
+                "statistics_start_point_control_value": 0.04
             }
         }]
     }
