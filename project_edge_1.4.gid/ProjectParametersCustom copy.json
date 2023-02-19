@@ -1,14 +1,85 @@
 {
     "analysis_stage"   : "KratosMultiphysics.FluidDynamicsApplication.fluid_dynamics_analysis",
     "problem_data"     : {
-        "problem_name"  : "project_sim_1.0",
+        "problem_name"  : "project_edge_1.4",
         "parallel_type" : "MPI",
         "echo_level"    : 0,
         "start_time"    : 0.0,
         "end_time"      : 250
     },
     "output_processes" : {
-       "h5_output"  : [
+        "gid_output" : [{
+            "python_module" : "gid_output_process",
+            "kratos_module" : "KratosMultiphysics",
+            "process_name"  : "GiDOutputProcess",
+            "Parameters"    : {
+                "model_part_name"        : "FluidModelPart.fluid_computational_model_part",
+                "postprocess_parameters" : {
+                    "result_file_configuration" : {
+                        "gidpost_flags"               : {
+                            "GiDPostMode"           : "GiD_PostBinary",
+                            "WriteDeformedMeshFlag" : "WriteDeformed",
+                            "WriteConditionsFlag"   : "WriteConditions",
+                            "MultiFileFlag"         : "SingleFile"
+                        },
+                        "file_label"                  : "time",
+                        "output_control_type"         : "time",
+                        "output_interval"             : 10,
+                        "body_output"                 : true,
+                        "node_output"                 : false,
+                        "skin_output"                 : false,
+                        "plane_output"                : [],
+                        "nodal_results"               : ["VELOCITY","PRESSURE"],
+                        "gauss_point_results"         : [],
+                        "nodal_nonhistorical_results" : []
+                    },
+                    "point_data_configuration"  : []
+                },
+                "output_name"            : "gid_output/project_edge_1.4"
+            }
+        }],
+        "vtk_output" : [{
+            "python_module" : "vtk_output_process",
+                "kratos_module" : "KratosMultiphysics",
+                "process_name"  : "VtkOutputProcess",
+                "help"          : "This process writes postprocessing files for Paraview",
+                "Parameters"    : {
+                    "model_part_name"                             : "FluidModelPart.NoSlip3D_structure",
+                    "output_control_type"                         : "step",
+                    "output_interval"                             : 10,
+                    "file_format"                                 : "ascii",
+                    "output_precision"                            : 7,
+                    "output_sub_model_parts"                      : false,
+                    "output_path"                                 : "results/vtk_output/structure/",
+                    "save_output_files_in_folder"                 : true,
+                    "nodal_solution_step_data_variables"          : ["PRESSURE"],
+                    "nodal_data_value_variables"                  : [],
+                    "element_data_value_variables"                : [],
+                    "condition_data_value_variables"              : [],
+                    "gauss_point_variables_extrapolated_to_nodes" : []
+            }
+        },
+        {
+            "python_module" : "vtk_output_process",
+            "kratos_module" : "KratosMultiphysics",
+            "process_name"  : "VtkOutputProcess",
+            "Parameters"    : {
+                "model_part_name"                             : "FluidModelPart.fluid_computational_model_part",
+                "output_control_type"                         : "time",
+                "output_interval"                             : 10,
+                "file_format"                                 : "ascii",
+                "output_precision"                            : 7,
+                "output_sub_model_parts"                      : false,
+                "output_path"                                 : "results/vtk_output/domain/",
+                "save_output_files_in_folder"                 : true,
+                "nodal_solution_step_data_variables"          : ["VELOCITY","PRESSURE"],
+                "nodal_data_value_variables"                  : [],
+                "element_data_value_variables"                : [],
+                "condition_data_value_variables"              : [],
+                "gauss_point_variables_extrapolated_to_nodes" : []
+            }
+        }],
+    "h5_output"  : [
         {
             "python_module": "single_mesh_temporal_output_process",
             "kratos_module": "KratosMultiphysics.HDF5Application",
@@ -27,7 +98,7 @@
                     "list_of_variables": ["SCALAR_MEAN", "SCALAR_VARIANCE"]
                 },
                 "output_time_settings": {
-                    "time_frequency": 0.3,
+                    "time_frequency": 0.03,
                     "step_frequency": 10
                 }
             }
@@ -50,7 +121,7 @@
                     "list_of_variables": ["VECTOR_3D_MEAN", "VECTOR_3D_VARIANCE"]
                 },
                 "output_time_settings": {
-                    "time_frequency": 0.3,
+                    "time_frequency": 0.03,
                     "step_frequency": 10
                 }
             }
@@ -68,8 +139,7 @@
             "output_variables"  : ["PRESSURE","VELOCITY_X","VELOCITY_Y","VELOCITY_Z"],
             "output_file_settings": {            
                 "file_name"  : "reference_point_output",
-                "output_path": "results/ascii_output/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/"}
         }
     },{
         "python_module"   : "multiple_points_output_process",
@@ -79,20 +149,22 @@
             "help"              : "This process writes several points to a file. Internally it holds objects of type PointOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
             "entity_type"       : "element",
-            "positions"         : [[4.6000, 34.9000, 250.0000],
-                                   [34.9000, 4.6000, 250.0000],
-                                   [-4.6000, 34.9000, 250.0000],
-                                   [-34.9000, 4.6000, 250.0000],
-                                   [4.6000, -34.9000, 250.0000],
-                                   [34.9000, -4.6000, 250.0000],
-                                   [-4.6000, -34.9000, 250.0000],
-                                   [-34.9000, -4.6000, 250.0000]],
+            "positions"         : [[-8.9000, 29.7381, 249.9998],
+                                   [-29.7381, 8.9000, 249.9998],
+                                   [-5.2094, -26.0474, 249.9998],
+                                   [0.0000, -31.2568, 249.9998],
+                                   [5.2094, -26.0474, 249.9998],
+                                   [29.7381, 8.9000, 249.9998],
+                                   [8.9000, 29.7381, 249.9998],
+                                   [34.0860, 4.5521, 150.0000],
+                                   [4.5521, 34.0860, 150.0000],
+                                   [-34.0860, 4.5521, 150.0000],
+                                   [-4.5521, 34.0860, 150.0000]],
                                    
             "output_variables"  : ["PRESSURE", "VELOCITY_X"],
             "output_file_settings": {            
                 "file_name"  : "multiple_point_output_at",
-                "output_path": "results/ascii_output/multiple_points/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/multiple_points/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -107,9 +179,7 @@
             "output_variables"  : ["VELOCITY_X"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line-2h/",
-                "write_buffer_size": 1}
-                
+                "output_path": "results/ascii_output/line-2h/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -124,8 +194,7 @@
             "output_variables"  : ["VELOCITY_X"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line-h/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line-h/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -140,8 +209,7 @@
             "output_variables"  : ["VELOCITY_X"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line0.5h/"},
-                "write_buffer_size": 1
+                "output_path": "results/ascii_output/line0.5h/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -150,14 +218,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-34.9000, 0.0000, 0.0000],
-            "end_point"         : [-34.9000, 0.0000, 250.0000],
+            "start_point"       : [-31.3000, 0.0000, 0.0000],
+            "end_point"         : [-31.3000, 0.0000, 249.9998],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_v_front/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_v_front/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -166,14 +233,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [34.9000, 0.0000, 0.0000],
-            "end_point"         : [34.9000, 0.0000, 250.0000],
+            "start_point"       : [31.30000, 0.0000, 0.0000],
+            "end_point"         : [31.30000, 0.0000, 249.9998],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_v_back/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_v_back/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -182,14 +248,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-34.9000, 0.0000, 250.0000],
-            "end_point"         : [34.9000, 0.0000, 250.0000],
+            "start_point"       : [-31.30, 0.0000, 249.9998],
+            "end_point"         : [31.30, 0.0000, 249.9998],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_top/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/lineat_-31-30_0_249-9998/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -198,14 +263,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-34.9000, 4.6000, 166.6667],
-            "end_point"         : [-34.9000, -4.6000, 166.6667],
+            "start_point"       : [-34.9000, -4.6000, 167.6667],
+            "end_point"         : [-4.6000, -34.9000, 167.6667],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_1/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_at_-34-9_-4_5_167_to_-4-5_-34_9_167/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -214,14 +278,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-34.9000, -4.6000, 166.6667],
-            "end_point"         : [-4.6000, -34.9000, 166.6667],
+            "start_point"       : [34.9000, -4.6000, 167.6667],
+            "end_point"         : [4.6000, -34.9000, 167.6667],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_2/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_at_34-9_-4_5_167_to_4-5_-34_9_167/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -230,14 +293,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-4.6000, -34.9000, 166.6667],
-            "end_point"         : [4.6000, -34.9000, 166.6667],
+            "start_point"       : [-34.9000, 4.6000, 167.6667],
+            "end_point"         : [-4.6000, 34.9000, 167.6667],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_3/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_at_-34-9_4_5_167_to_-4-5_34_9_167/"}
         }
      },{
         "python_module"   : "line_output_process",
@@ -246,78 +308,13 @@
         "Parameters" : {
             "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
             "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [4.6000, -34.9000, 166.6667],
-            "end_point"         : [34.9000, -4.6000, 166.6667],
+            "start_point"       : [34.9000, 4.6000, 167.6667],
+            "end_point"         : [4.6000, 34.9000, 167.6667],
             "sampling_points"   : 20,
             "output_variables"  : ["PRESSURE"],
             "output_file_settings": {            
                 "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_4/",
-                "write_buffer_size": 1}
-        }
-     },{
-        "python_module"   : "line_output_process",
-        "kratos_module" : "KratosMultiphysics",
-        "process_name"    : "LineOutputProcess",
-        "Parameters" : {
-            "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
-            "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [34.9000, -4.6000, 166.6667],
-            "end_point"         : [34.9000, 4.6000, 166.6667],
-            "sampling_points"   : 20,
-            "output_variables"  : ["PRESSURE"],
-            "output_file_settings": {            
-                "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_5/"},
-                "write_buffer_size": 1
-        }
-     },{
-        "python_module"   : "line_output_process",
-        "kratos_module" : "KratosMultiphysics",
-        "process_name"    : "LineOutputProcess",
-        "Parameters" : {
-            "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
-            "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [34.9000, 4.6000, 166.6667],
-            "end_point"         : [4.6000, 34.9000, 166.6667],
-            "sampling_points"   : 20,
-            "output_variables"  : ["PRESSURE"],
-            "output_file_settings": {            
-                "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_6/",
-                "write_buffer_size": 1}
-        }
-     },{
-        "python_module"   : "line_output_process",
-        "kratos_module" : "KratosMultiphysics",
-        "process_name"    : "LineOutputProcess",
-        "Parameters" : {
-            "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
-            "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [4.6000, 34.9000, 166.6667],
-            "end_point"         : [-4.6000, 34.9000, 166.6667],
-            "sampling_points"   : 20,
-            "output_variables"  : ["PRESSURE"],
-            "output_file_settings": {            
-                "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_7/",
-                "write_buffer_size": 1}
-        }
-     },{
-        "python_module"   : "line_output_process",
-        "kratos_module" : "KratosMultiphysics",
-        "process_name"    : "LineOutputProcess",
-        "Parameters" : {
-            "help"              : "This process writes output for several points along a line to a file. Internally it holds an object of type MultiplePointsOutputProcess",
-            "model_part_name"   : "FluidModelPart.fluid_computational_model_part",
-            "start_point"       : [-4.6000, 34.9000, 166.6667],
-            "end_point"         : [-34.9000, 4.6000, 166.6667],
-            "sampling_points"   : 20,
-            "output_variables"  : ["PRESSURE"],
-            "output_file_settings": {            
-                "file_name"  : "line_output",
-                "output_path": "results/ascii_output/line_8/",
-                "write_buffer_size": 1}
+                "output_path": "results/ascii_output/line_at_34-9_4_5_167_to_4-5_34_9_167/"}
         }
      }],
     "restart_output" : [
@@ -343,7 +340,7 @@
         "solver_type"                     : "FractionalStep",
         "model_import_settings"           : {
             "input_type"     : "mdpa",
-            "input_filename" : "project_sim_1.0"
+            "input_filename" : "project_edge_1.4"
         },
         "material_import_settings"        : {
             "materials_filename" : "FluidMaterials.json"
@@ -494,7 +491,7 @@
                 "write_output_file" : true,
                 "print_to_screen"   : false,
                 "start_point"       : [0.0,0.0,0.0],
-                "end_point"         : [0.0,0.0,250.0000],
+                "end_point"         : [0.0,0.0,249.9998],
                 "z_rotation_angle"  : 45.0,
                 "intervals"   : 55,
                 "interval"               : [0.0,"End"],
