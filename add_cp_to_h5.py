@@ -21,14 +21,14 @@ import os
 # user input
 
 ref_point_file = os.path.join('ascii_output','reference_point_output.dat')
-ref_p_first_t = 0.3
-ref_p_delta_t = 0.3
+ref_p_first_t = 0.03
+ref_p_delta_t = 0.03
 rho = 1.2
 
 deck_results_folder = os.path.join('hdf5_output','structure')
 file_prefix = 'NoSlip3D_structure_T-'
 h5_first_t = 0.00
-h5_last_t = 250.00
+h5_last_t = 249.90
 h5_delta_t = 0.3
 file_idxs = np.linspace(h5_first_t, h5_last_t, int(
     (h5_last_t+h5_delta_t-h5_first_t)/h5_delta_t), endpoint=True)
